@@ -1,7 +1,7 @@
 """
 Comprehensive C++ DSA Functions and Algorithms Catalog Generator
 Generates a multi-sheet Excel workbook with detailed information about:
-- C++ STL algorithms (all 125+ algorithms from <algorithm>)
+- C++ STL algorithms (50+ most important algorithms from <algorithm> and <numeric>)
 - Container member functions (vector, map, set, list, deque, stack, queue, etc.)
 - Usage frequencies for real-world and competitive programming/DSA
 
@@ -24,6 +24,10 @@ print()
 # ==============================================================================
 # HELPER FUNCTION FOR FORMATTING
 # ==============================================================================
+
+# Constants for cell formatting
+UNFILLED_COLOR = '00000000'  # Default unfilled cell color in openpyxl
+
 def format_worksheet(ws, header_color='4472C4', freeze_panes=True):
     """Apply professional formatting to worksheet"""
     # Header styling
@@ -56,7 +60,7 @@ def format_worksheet(ws, header_color='4472C4', freeze_panes=True):
             try:
                 if len(str(cell.value)) > max_length:
                     max_length = len(str(cell.value))
-            except:
+            except (TypeError, AttributeError):
                 pass
         adjusted_width = min(max_length + 3, 60)
         ws.column_dimensions[column_letter].width = adjusted_width
@@ -66,7 +70,7 @@ def format_worksheet(ws, header_color='4472C4', freeze_panes=True):
     for row_idx, row in enumerate(ws.iter_rows(min_row=2), start=2):
         if row_idx % 2 == 0:
             for cell in row:
-                if cell.fill.start_color.index == '00000000':  # Only if not already filled
+                if cell.fill.start_color.index == UNFILLED_COLOR:  # Only if not already filled
                     cell.fill = light_fill
         for cell in row:
             cell.border = border
