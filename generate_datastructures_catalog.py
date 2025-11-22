@@ -1671,7 +1671,7 @@ use_cases = [
 # ==============================================================================
 # CREATE EXCEL WORKBOOK
 # ==============================================================================
-output_path = Path("/home/vasco-debian/Desktop/DEV/Versioned/Personal/exel_DS/datastructures_comprehensive_catalog.xlsx")
+output_path = Path("datastructures_comprehensive_catalog.xlsx")
 
 # Create DataFrames
 df_structures = pd.DataFrame(structures)
